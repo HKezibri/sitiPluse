@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from flask_mqtt import Mqtt
 from flask_pymongo import PyMongo   # pip install Flask-PyMongo
 import datetime
@@ -20,23 +20,28 @@ app.config['MQTT_KEEPALIVE'] = 30
 mqtt = Mqtt(app)
 
 
-
+# -- connect to mqtt brocker
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     allTopics = mongo.db.topics.find()
     for e in allTopics:
-        mqtt.subscribe(e['topic'])
+        mqtt.subscribe(e['topic'] + 'counter')
     
     
 
-def getLastIdcounter():
-    coll, d = mongo.db.counter.find(), {}
+def getLastIdCounter():
+    coll = mongo.db.counter.find()
     for p in coll:
         pass
-    d = p
-    return int(d["_id"])
+    return int(p["_id"]) + 1
 
+def getLastIdTopic():
+    coll = mongo.db.topics.find()
+    for p in coll:
+        pass
+    return int(p["_id"]) + 1
 
+# -- mqtt messages & inserssion in database
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
     
@@ -48,7 +53,6 @@ def handle_mqtt_message(client, userdata, message):
     minutes = DATE.strftime("%M")
     seconds = DATE.strftime("%S")
 
-
     data = dict(
         topic=message.topic,
         payload=message.payload.decode()
@@ -58,18 +62,64 @@ def handle_mqtt_message(client, userdata, message):
         'annee': str(annee), 'mois' : mois, 'jour': jour, 'heure' : heure, 'minutes' : minutes, 'seconds' : seconds
     }
 
-    lastId = getLastIdcounter() + 1
-
+    """
+    lastId = getLastIdCounter()
     mongo.db.counter.insert_one({
         "_id": lastId,
         'topic' : message.topic, 
         'payload':message.payload.decode(), 
         'date': dateFormate
-        })
-
+    })
+    """
 
     print(data ,' ==>  ', dateFormate)
     
+
+# -- login api
+@app.route('/login', methods = ["Get", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form['email']
+        password = request.form["password"]
+
+        login = mongo.db.employees.find_one({"E-mail":email, "Password" : password})
+        if login is not None :
+            return jsonify(login)
+    return jsonify({"status" : "not found"})
+
+# -- add topic api
+@app.route('/topic/add', methods = ["Get", "POST"])
+def addTopic():
+
+    topics = mongo.db.topics.find()
+    allTopics = [e['topic'] for e in topics]
+    id = getLastIdTopic()
+
+    if request.method == "POST" :
+        nameTopic = request.form['nameTopic']
+        if nameTopic not in allTopics:
+            mongo.db.topics.insert_one({
+                "_id": id,
+                'topic' : nameTopic
+            })
+            return jsonify({"status" : "Topic added successfully"})
+
+    return jsonify({"status" : "Failed to add topic"})
+
+# -- delete topic api
+@app.route('/topic/delete', methods = ["Get", "POST"])
+def deleteTopic():
+
+    if request.method == "POST" :
+        nameTopic = request.form['nameTopic']
+        
+        try :
+            mongo.db.topics.delete_one({ 'topic' : nameTopic })
+            return jsonify({"status" : "Topic deleted successfully"})
+        except :                
+            return jsonify({"status" : "Failed to delete topic"})
+
+
 
 
 if __name__ == '__main__':
