@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_pymongo import PyMongo 
-
+import datetime
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/MQTT"
 mongo = PyMongo(app)
@@ -13,7 +13,15 @@ topic6 = 'F01/R01/M06/'
 topic7 = 'F01/R01/M07/'
 topic8 = 'F01/R01/M08/'
 topic9 = 'F01/R01/M09/'
-
+ 
+DATE = datetime.datetime.now()
+jour = DATE.strftime("%d")
+mois = DATE.strftime("%m")
+annee = DATE.year
+heure = DATE.strftime("%H")
+minutes = DATE.strftime("%M")
+seconds = DATE.strftime("%S")
+"""
 listTopics = [
     topic1, topic2, topic3, topic4, topic5, topic6, topic7, topic8, topic9
 ]
@@ -28,7 +36,7 @@ for numTopic, topic in enumerate(listTopics):
     except:
         print('alredy axist')
 
-"""
+
 allTopics = mongo.db.counter.find()
 cpt = 0
 for e in allTopics:
@@ -83,5 +91,4 @@ for employee in emps:
     except:
         print('alredy axist')
 """
-
 

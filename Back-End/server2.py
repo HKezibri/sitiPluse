@@ -44,33 +44,20 @@ def getLastIdTopic():
 # -- mqtt messages & inserssion in database
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    
-    DATE = datetime.datetime.now()
-    jour = DATE.strftime("%d")
-    mois = DATE.strftime("%m")
-    annee = DATE.year
-    heure = DATE.strftime("%H")
-    minutes = DATE.strftime("%M")
-    seconds = DATE.strftime("%S")
-
+   
     data = dict(
         topic=message.topic,
         payload=message.payload.decode()
     )
     
-    dateFormate = {
-        'annee': str(annee), 'mois' : mois, 'jour': jour, 'heure' : heure, 'minutes' : minutes, 'seconds' : seconds
-    }
-
-    """
     lastId = getLastIdCounter()
     mongo.db.counter.insert_one({
         "_id": lastId,
         'topic' : message.topic, 
         'payload':message.payload.decode(), 
-        'date': dateFormate
+        'date': datetime.datetime.utcnow()
     })
-    """
+    
 
     print(data ,' ==>  ', dateFormate)
     
@@ -119,7 +106,10 @@ def deleteTopic():
         except :                
             return jsonify({"status" : "Failed to delete topic"})
 
-
+@app.route('/', methods = ["Get"])
+def testApi():
+    print('flutter !! =============================================')
+    return jsonify({"status" : "test reussite !"})
 
 
 if __name__ == '__main__':

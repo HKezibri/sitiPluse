@@ -1,17 +1,11 @@
-import 'package:flutter/material.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
 
-void main() => runApp(new HelloWorldApp());
+void main(List<String> arguments) async {
 
-class HelloWorldApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: new Material(
-        child: new Center(
-          child: new Text("Hello siti!"),
-        ),
-      ),
-    );
-  }
+  final response = await http.get(Uri.http('your addresse', '/'));
+
+  final decoded = convert.jsonDecode(response.body) as Map<String, dynamic>;
+  print("${decoded['status']} <==============");
 }
+
