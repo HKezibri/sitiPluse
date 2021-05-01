@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  mqtt_client: ^9.2.0
+  syncfusion_flutter_gauges: ^19.1.58
 
 
 

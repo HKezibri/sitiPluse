@@ -49,7 +49,7 @@ def handle_mqtt_message(client, userdata, message):
         topic=message.topic,
         payload=message.payload.decode()
     )
-    
+    """
     lastId = getLastIdCounter()
     mongo.db.counter.insert_one({
         "_id": lastId,
@@ -57,9 +57,9 @@ def handle_mqtt_message(client, userdata, message):
         'payload':message.payload.decode(), 
         'date': datetime.datetime.utcnow()
     })
-    
+    """
 
-    print(data ,' ==>  ', dateFormate)
+    print(data ,' ==>  ', datetime.datetime.utcnow())
     
 
 # -- login api
