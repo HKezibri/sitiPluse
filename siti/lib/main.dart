@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:siti/mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+import 'dart:convert'; // as convert
 void main() {
   runApp(MyApp());
 }
@@ -84,11 +84,10 @@ class _MyAppState extends State<MyApp> {
           //var decoded = convert.jsonDecode(response.body) as Map<String, dynamic>;
           //var topics = decoded['name'];
 
-          final url = "localhost:5000/log";
-          final response = await http.post(url, body: json.encode({"name" : user}));
+          final url =  Uri.http("192.168.0.178:5000", "/log");
+          final response = await http.post(url, body: json.encode({"name" : user, "password" : password}));
 
-
-          print('-------------- function call-------------');
+          print('-------------- function call------------- ');
           print(user);
           print(password);
           print('--------------   end call   ----------------');

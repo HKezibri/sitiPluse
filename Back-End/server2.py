@@ -126,10 +126,12 @@ def testApi():
 @app.route('/log', methods = ["Get", "POST"])
 def testLogin():
     if request.method == "POST":
+        print('respons ---------------------------------/////')
         request_data = request.data
         request_data = json.loads(request_data.decode('utf-8'))
         name = request_data['name']
-        print('++++++++++++++++++++++++++++++++++++++++++++++ Hi ', name)
+        pwd = request_data['password']
+        print('++++++++++++++++++++++++++++++++++++++++++++++ Hi ', name, "your password is  ", pwd)
 
 
 if __name__ == '__main__':
