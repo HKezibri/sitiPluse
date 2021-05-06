@@ -1,0 +1,11 @@
+=> connexion flutter python
+onPressed: () async {
+
+                var response = await http.get(Uri.http('192.168.0.178:5000', '/'));
+                var decoded = convert.jsonDecode(response.body) as Map<String, dynamic>;
+                var topics = decoded['topics'];
+
+                print("---------------------------------------------->   $topics");
+	
+
+                return {topics.forEach((e) => client?.subscribe(e, MqttQos.atLeastOnce))};

@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_mqtt import Mqtt
 from flask_pymongo import PyMongo   # pip install Flask-PyMongo
 import datetime
+import json
 
 
 app = Flask(__name__)
@@ -31,9 +32,12 @@ def handle_connect(client, userdata, flags, rc):
 
 def getLastIdCounter():
     coll = mongo.db.counter.find()
-    for p in coll:
-        pass
-    return int(p["_id"]) + 1
+    try :
+        for p in coll:
+            pass
+        return int(p["_id"]) + 1
+    except :
+        return 1
 
 def getLastIdTopic():
     coll = mongo.db.topics.find()
@@ -50,13 +54,14 @@ def handle_mqtt_message(client, userdata, message):
         payload=message.payload.decode()
     )
     """
-    lastId = getLastIdCounter()
-    mongo.db.counter.insert_one({
-        "_id": lastId,
-        'topic' : message.topic, 
-        'payload':message.payload.decode(), 
-        'date': datetime.datetime.utcnow()
-    })
+    if int(datetime.datetime.utcnow().hour) >= 9 and int(datetime.datetime.utcnow().hour) <= 16:
+        lastId = getLastIdCounter()
+        mongo.db.counter.insert_one({
+            "_id": lastId,
+            'topic' : message.topic, 
+            'payload':message.payload.decode(), 
+            'date': datetime.datetime.utcnow()
+        })
     """
 
     print(data ,' ==>  ', datetime.datetime.utcnow())
@@ -106,10 +111,25 @@ def deleteTopic():
         except :                
             return jsonify({"status" : "Failed to delete topic"})
 
-@app.route('/', methods = ["Get"])
+@app.route('/topics', methods = ["Get"])
 def testApi():
+    allTopics = mongo.db.topics.find()
+    topics = []
+    for e in allTopics:
+        topics.append(e['topic'] + 'counter')
     print('flutter !! =============================================')
-    return jsonify({"status" : "test reussite !"})
+    return jsonify({"topics" : topics, "name" : "abdou"})
+
+#mqtt.publish('F01/R01/M04/flow', 22)
+
+
+@app.route('/log', methods = ["Get", "POST"])
+def testLogin():
+    if request.method == "POST":
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        name = request_data['name']
+        print('++++++++++++++++++++++++++++++++++++++++++++++ Hi ', name)
 
 
 if __name__ == '__main__':

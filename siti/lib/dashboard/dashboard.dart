@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ], annotations: <GaugeAnnotation>[
             GaugeAnnotation(
                 widget: Container(
-                    child: const Text('50.0',
+                    child: const Text('51.0',
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold))),
                 angle: 90,
