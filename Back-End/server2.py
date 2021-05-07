@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, session
 from flask_mqtt import Mqtt
 from flask_pymongo import PyMongo   # pip install Flask-PyMongo
 import datetime
@@ -44,6 +44,11 @@ def getLastIdTopic():
     for p in coll:
         pass
     return int(p["_id"]) + 1
+
+def isEmpty(word):
+    if word:
+        return False
+    return True
 
 # -- mqtt messages & inserssion in database
 @mqtt.on_message()
@@ -125,13 +130,33 @@ def testApi():
 
 @app.route('/log', methods = ["Get", "POST"])
 def testLogin():
+    global Email
+    global Password
     if request.method == "POST":
         print('respons ---------------------------------/////')
         request_data = request.data
         request_data = json.loads(request_data.decode('utf-8'))
-        name = request_data['name']
-        pwd = request_data['password']
-        print('++++++++++++++++++++++++++++++++++++++++++++++ Hi ', name, "your password is  ", pwd)
+        Email = request_data['Email']
+        Password = request_data['Password']
+        print('++++++++++++++++++++++++++++++++++++++++++++++ Hi ', Email, "your password is  ", Password)
+       
+    User = mongo.db.employees.find_one({"Email":Email, "Password": Password})
+
+    if isEmpty(User): 
+        return jsonify({"status" : False})
+    else :
+        session["Name"] = User["Name"]
+        session["id"] = User["_id"]
+        session["Email"] = User["Email"]
+        session["Password"] = User["Password"]
+        session["Role"] = User["Role"]
+        return jsonify({
+            "status" : True,
+            "Name" : User["Name"],
+            "id" : User["_id"],
+            "Email" : User["Email"],
+            "Role" : User["Role"]
+        })
 
 
 if __name__ == '__main__':

@@ -47,39 +47,35 @@ for e in allTopics:
 print(cpt)
 """
 
-"""
+
 emps = [
     {
         "_id": "JM11111",
-        "F-Name" : "Abdellah",
-        "L-Name" : "ELAAROUB",
-        "E-mail" : "abdouelaaroub@gmail.com",
+        "Name" : "Abdellah-ELAAROUB",
+        "Email" : "abdouelaaroub@gmail.com",
         "Password" : "abdouidsd",
-        "Grade" : "admin"
+        "Role" : "admin"
     },
     {
         "_id": "JM22222",
-        "F-Name" : "Hiba",
-        "L-Name" : "QEZIBRI",
-        "E-mail" : "qezibrihiba@gmail.com",
+        "Name" : "Hiba-QEZIBRI",
+        "Email" : "qezibrihiba@gmail.com",
         "Password" : "hibaidsd",
-        "Grade" : "admin"
+        "Role" : "admin"
     },
     {
         "_id": "JB33333",
-        "F-Name" : "Walid",
-        "L-Name" : "DAMOU",
-        "E-mail" : "damou.walid.2015@gmail.com",
+        "Name" : "Walid-DAMOU",
+        "Email" : "damou.walid.2015@gmail.com",
         "Password" : "walididsd",
-        "Grade" : "employee"
+        "Role" : "Controleur"
     },
     {
         "_id": "JB44444",
-        "F-Name" : "Khawla",
-        "L-Name" : "HAMOUICHOU",
-        "E-mail" : "hamouichoukhawla@gmail.com",
+        "Name" : "Khawla-HAMOUICHOU",
+        "Email" : "hamouichoukhawla@gmail.com",
         "Password" : "khawlaidsd",
-        "Grade" : "employee"
+        "Role" : "Controleur"
     }
     
 ]
@@ -90,4 +86,3 @@ for employee in emps:
         print("successfuly")
     except:
         print('alredy axist')
-"""

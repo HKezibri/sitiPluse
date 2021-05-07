@@ -5,6 +5,8 @@ import 'package:siti/mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // as convert
+import 'package:siti/dashboard/dashboard.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -80,12 +82,21 @@ class _MyAppState extends State<MyApp> {
         isRequest(true);
 
         Future.delayed(Duration(seconds: 2), () async {
-          //var response = await http.get(Uri.http('192.168.0.178:5000', '/topics'));
-          //var decoded = convert.jsonDecode(response.body) as Map<String, dynamic>;
-          //var topics = decoded['name'];
 
           final url =  Uri.http("192.168.0.178:5000", "/log");
-          final response = await http.post(url, body: json.encode({"name" : user, "password" : password}));
+          final response = await http.post(url, body: json.encode({"Email" : user, "Password" : password}));
+
+          var response2 = await http.get(Uri.http('192.168.0.178:5000', '/log'));
+          var decoded = jsonDecode(response2.body) as Map<String, dynamic>;
+          var status = decoded['status'];
+          print('0------------------------------------------------------->   $status');
+
+          if (status == true){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => GaugeApp()),
+            );
+          }
 
           print('-------------- function call------------- ');
           print(user);
