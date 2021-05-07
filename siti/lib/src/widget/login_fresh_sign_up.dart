@@ -243,7 +243,7 @@ class _LoginFreshSignUpState extends State<LoginFreshSignUp> {
                                     ? Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Image.asset(
-                                          "assets/images_login_fresh_34_/icon_eye_close.png",
+                                          "assets/icon_eye_close.png",
                                           package: 'siti',
                                           width: 15,
                                           height: 15,
@@ -252,7 +252,7 @@ class _LoginFreshSignUpState extends State<LoginFreshSignUp> {
                                     : Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Image.asset(
-                                          "assets/images_login_fresh_34_/icon_eye_open.png",
+                                          "assets/icon_eye_open.png",
                                           package: 'siti',
                                           width: 15,
                                           height: 15,
