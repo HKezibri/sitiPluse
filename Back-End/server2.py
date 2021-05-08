@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo   # pip install Flask-PyMongo
 import datetime
 import json
 import random
+import smtplib
 
 
 app = Flask(__name__)
@@ -60,11 +61,14 @@ def newPwd() :
 
 
 def sendmail(mail):
-    import smtplib
+    pwd = newPwd()
+    email = "Use " + "(" + pwd + ")" + " to sign in"
     server = smtplib.SMTP_SSL("smtp.gmail.com")
     server.login("abdouelaaroub@gmail.com", "AbdouDUT05")
-    server.sendmail("abdouelaaroub@gmail.com", mail, "Sign up by this passwword : \t" + newPwd())
+    server.sendmail("abdouelaaroub@gmail.com", mail, email)
     server.quit()
+    print(email, "/////////////////////////////////////////////////////////")
+    return pwd
 
 # -- mqtt messages & inserssion in database
 @mqtt.on_message()
@@ -139,12 +143,10 @@ def Login():
     global Email
     global Password
     if request.method == "POST":
-        print('respons ---------------------------------/////')
         request_data = request.data
         request_data = json.loads(request_data.decode('utf-8'))
         Email = request_data['Email']
         Password = request_data['Password']
-        print('++++++++++++++++++++++++++++++++++++++++++++++ Hi ', Email, "your password is  ", Password)
        
     User = mongo.db.employees.find_one({"Email":Email, "Password": Password})
 
@@ -189,7 +191,25 @@ def SignIn():
             print('Mayb alredy existe..')
 
 
-
+# -- Recover password api
+@app.route('/reset', methods = ["Get", "POST"])
+def Recover():
+    
+    if request.method == "POST" :
+        print('respons  <-<-<-<-<-----------------------------------------------|')
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        
+        try :
+            recovred = sendmail(request_data['Email'])
+            mongo.db.employees.update_one({"Email":request_data['Email']},
+                {
+                    "$set": {
+                        "Password": recovred
+                    }
+                })
+        except:
+            print('error- -----')
 
 
 
