@@ -59,6 +59,12 @@ def newPwd() :
     return nbr
 
 
+def sendmail(mail):
+    import smtplib
+    server = smtplib.SMTP_SSL("smtp.gmail.com")
+    server.login("abdouelaaroub@gmail.com", "AbdouDUT05")
+    server.sendmail("abdouelaaroub@gmail.com", mail, "Sign up by this passwword : \t" + newPwd())
+    server.quit()
 
 # -- mqtt messages & inserssion in database
 @mqtt.on_message()
@@ -181,6 +187,7 @@ def SignIn():
             })
         except:
             print('Mayb alredy existe..')
+
 
 
 
