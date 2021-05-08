@@ -163,7 +163,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "assets/icon_user.png",
+                              "./assets/icon_user.png",
                               package: 'siti',
                               width: 15,
                               height: 15,
@@ -206,7 +206,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "assets/images_login_fresh_34_/icon_password.png",
+                              "./assets/images_login_fresh_34_/icon_password.png",
                               package: 'siti',
                               width: 15,
                               height: 15,
@@ -269,13 +269,13 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                     : GestureDetector(
                         onTap: () async{
 
-                          final url =  Uri.http("192.168.0.178:5000", "/log");
+                          final url =  Uri.http("192.168.0.178:5000", "/login");
                           final response = await http.post(url, body: json.encode({
                             "Email" : this._textEditingControllerUser.text,
                             "Password" : this._textEditingControllerPassword.text
                           }));
 
-                          var response2 = await http.get(Uri.http('192.168.0.178:5000', '/log'));
+                          var response2 = await http.get(Uri.http('192.168.0.178:5000', '/login'));
                           var decoded = jsonDecode(response2.body) as Map<String, dynamic>;
                           var status = decoded['status'];
                           print('0------------------------------------------------------->   $status');

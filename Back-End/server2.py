@@ -72,17 +72,6 @@ def handle_mqtt_message(client, userdata, message):
     print(data ,' ==>  ', datetime.datetime.utcnow())
     
 
-# -- login api
-@app.route('/login', methods = ["Get", "POST"])
-def login():
-    if request.method == "POST":
-        email = request.form['email']
-        password = request.form["password"]
-
-        login = mongo.db.employees.find_one({"E-mail":email, "Password" : password})
-        if login is not None :
-            return jsonify(login)
-    return jsonify({"status" : "not found"})
 
 # -- add topic api
 @app.route('/topic/add', methods = ["Get", "POST"])
@@ -128,8 +117,9 @@ def testApi():
 #mqtt.publish('F01/R01/M04/flow', 22)
 
 
-@app.route('/log', methods = ["Get", "POST"])
-def testLogin():
+# -- login api
+@app.route('/login', methods = ["Get", "POST"])
+def Login():
     global Email
     global Password
     if request.method == "POST":
@@ -157,6 +147,30 @@ def testLogin():
             "Email" : User["Email"],
             "Role" : User["Role"]
         })
+
+
+# -- Sign In api
+@app.route('/signin', methods = ["Get", "POST"])
+def SignIn():
+    
+    if request.method == "POST" :
+        print('respons  <---------------------------------------------------|')
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        
+        if request_data['Password'] != request_data['R_Password'] :
+            return jsonify({"status" : "Wrong repeatation of password"})
+        print('---------------------------------->', request_data['Name'])
+        try:
+            mongo.db.employees.insert_one({
+            "_id": request_data['CIN'],
+            "Name": request_data['Name'],
+            "Email": request_data['Email'],
+            "Password" : request_data['Password'],
+            "Role": "Controleur"
+            })
+        except:
+            print('Mayb alredy existe..')
 
 
 if __name__ == '__main__':

@@ -155,7 +155,7 @@ class _MyAppState extends State<MyApp> {
           print(signUpModel.repeatPassword);
           print(signUpModel.surname);
           print(signUpModel.name);
-
+                
           isRequest(false);
         });
   }
