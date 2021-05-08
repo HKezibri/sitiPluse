@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './login_fresh_loading.dart';
 import '../config/language.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert'; // as convert
 
 class LoginFreshResetPassword extends StatefulWidget {
   final Color backgroundColor;
@@ -176,9 +178,15 @@ class _LoginFreshResetPasswordState extends State<LoginFreshResetPassword> {
                     ),
                   )
                 : GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      print('||==========================>>   ${this._textEditingControllerUser.text}');
                       widget.funResetPassword(context, this.setIsRequest,
                           this._textEditingControllerUser.text);
+
+                      final url =  Uri.http("192.168.0.178:5000", "/reset");
+                      final response = await http.post(url, body: json.encode({
+                        "Email" : this._textEditingControllerUser.text
+                      }));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

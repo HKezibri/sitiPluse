@@ -3,6 +3,7 @@ from flask_mqtt import Mqtt
 from flask_pymongo import PyMongo   # pip install Flask-PyMongo
 import datetime
 import json
+import random
 
 
 app = Flask(__name__)
@@ -49,6 +50,15 @@ def isEmpty(word):
     if word:
         return False
     return True
+
+
+def newPwd() :
+    nbr = ''
+    for e in range(6):
+        nbr = nbr + str(random.randint(1,9))
+    return nbr
+
+
 
 # -- mqtt messages & inserssion in database
 @mqtt.on_message()
@@ -171,6 +181,12 @@ def SignIn():
             })
         except:
             print('Mayb alredy existe..')
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
