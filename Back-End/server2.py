@@ -3,6 +3,8 @@ from flask_mqtt import Mqtt
 from flask_pymongo import PyMongo   # pip install Flask-PyMongo
 import datetime
 import json
+import random
+import smtplib
 
 
 app = Flask(__name__)
@@ -50,6 +52,24 @@ def isEmpty(word):
         return False
     return True
 
+
+def newPwd() :
+    nbr = ''
+    for e in range(6):
+        nbr = nbr + str(random.randint(1,9))
+    return nbr
+
+
+def sendmail(mail):
+    pwd = newPwd()
+    email = "Use " + "(" + pwd + ")" + " to sign in"
+    server = smtplib.SMTP_SSL("smtp.gmail.com")
+    server.login("abdouelaaroub@gmail.com", "AbdouDUT05")
+    server.sendmail("abdouelaaroub@gmail.com", mail, email)
+    server.quit()
+    print(email, "/////////////////////////////////////////////////////////")
+    return pwd
+
 # -- mqtt messages & inserssion in database
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
@@ -72,17 +92,6 @@ def handle_mqtt_message(client, userdata, message):
     print(data ,' ==>  ', datetime.datetime.utcnow())
     
 
-# -- login api
-@app.route('/login', methods = ["Get", "POST"])
-def login():
-    if request.method == "POST":
-        email = request.form['email']
-        password = request.form["password"]
-
-        login = mongo.db.employees.find_one({"E-mail":email, "Password" : password})
-        if login is not None :
-            return jsonify(login)
-    return jsonify({"status" : "not found"})
 
 # -- add topic api
 @app.route('/topic/add', methods = ["Get", "POST"])
@@ -128,17 +137,16 @@ def testApi():
 #mqtt.publish('F01/R01/M04/flow', 22)
 
 
-@app.route('/log', methods = ["Get", "POST"])
-def testLogin():
+# -- login api
+@app.route('/login', methods = ["Get", "POST"])
+def Login():
     global Email
     global Password
     if request.method == "POST":
-        print('respons ---------------------------------/////')
         request_data = request.data
         request_data = json.loads(request_data.decode('utf-8'))
         Email = request_data['Email']
         Password = request_data['Password']
-        print('++++++++++++++++++++++++++++++++++++++++++++++ Hi ', Email, "your password is  ", Password)
        
     User = mongo.db.employees.find_one({"Email":Email, "Password": Password})
 
@@ -157,6 +165,55 @@ def testLogin():
             "Email" : User["Email"],
             "Role" : User["Role"]
         })
+
+
+# -- Sign In api
+@app.route('/signin', methods = ["Get", "POST"])
+def SignIn():
+    
+    if request.method == "POST" :
+        print('respons  <---------------------------------------------------|')
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        
+        if request_data['Password'] != request_data['R_Password'] :
+            return jsonify({"status" : "Wrong repeatation of password"})
+        print('---------------------------------->', request_data['Name'])
+        try:
+            mongo.db.employees.insert_one({
+            "_id": request_data['CIN'],
+            "Name": request_data['Name'],
+            "Email": request_data['Email'],
+            "Password" : request_data['Password'],
+            "Role": "Controleur"
+            })
+        except:
+            print('Mayb alredy existe..')
+
+
+# -- Recover password api
+@app.route('/reset', methods = ["Get", "POST"])
+def Recover():
+    
+    if request.method == "POST" :
+        print('respons  <-<-<-<-<-----------------------------------------------|')
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        
+        try :
+            recovred = sendmail(request_data['Email'])
+            mongo.db.employees.update_one({"Email":request_data['Email']},
+                {
+                    "$set": {
+                        "Password": recovred
+                    }
+                })
+        except:
+            print('error- -----')
+
+
+
+
 
 
 if __name__ == '__main__':

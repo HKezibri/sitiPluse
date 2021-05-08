@@ -47,7 +47,7 @@ for e in allTopics:
 print(cpt)
 """
 
-
+"""
 emps = [
     {
         "_id": "JM11111",
@@ -86,3 +86,10 @@ for employee in emps:
         print("successfuly")
     except:
         print('alredy axist')
+
+import smtplib
+server = smtplib.SMTP_SSL("smtp.gmail.com")
+server.login("abdouelaaroub@gmail.com", "AbdouDUT05")
+server.sendmail("abdouelaaroub@gmail.com", "kezibri.hiba@gmail.com", "Hi Hiba, jsut sending email test using python")
+server.quit()
+"""

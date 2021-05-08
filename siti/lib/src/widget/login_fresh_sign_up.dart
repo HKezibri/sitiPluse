@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'login_fresh_loading.dart';
 import '../config/language.dart';
 import '../service/sign_up_model.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 
@@ -243,7 +244,7 @@ class _LoginFreshSignUpState extends State<LoginFreshSignUp> {
                                     ? Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Image.asset(
-                                          "assets/images_login_fresh_34_/icon_eye_close.png",
+                                          "./assets/icon_eye_close.png",
                                           package: 'siti',
                                           width: 15,
                                           height: 15,
@@ -252,7 +253,7 @@ class _LoginFreshSignUpState extends State<LoginFreshSignUp> {
                                     : Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Image.asset(
-                                          "assets/images_login_fresh_34_/icon_eye_open.png",
+                                          "./assets/icon_eye_open.png",
                                           package: 'siti',
                                           width: 15,
                                           height: 15,
@@ -322,7 +323,17 @@ class _LoginFreshSignUpState extends State<LoginFreshSignUp> {
                   ),
                 )
               : GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    print('************************************');
+                    final url =  Uri.http("192.168.0.178:5000", "/signin");
+                    final response = await http.post(url, body: json.encode({
+                      "Email" : this.signUpModel.email,
+                      "Password" : this.signUpModel.password,
+                      "R_Password": this.signUpModel.repeatPassword,
+                      "CIN" : this.signUpModel.surname,
+                      "Name" : this.signUpModel.name
+                    }));
+                    print("${this.signUpModel.surname} ---------------------------");
                     widget.funSignUp(
                         context, this.setIsRequest, this.signUpModel);
                   },

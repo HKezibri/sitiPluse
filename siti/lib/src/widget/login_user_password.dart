@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../config/language.dart';
 import 'login_fresh_loading.dart';
+import 'package:siti/dashboard/dashboard.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert'; // as convert
 
 class LoginFreshUserAndPassword extends StatefulWidget {
   final Color backgroundColor;
@@ -117,6 +120,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                     topRight: const Radius.circular(50.0),
                   )),
               child: buildBody(),
+
             ),
           ),
         ],
@@ -159,7 +163,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "assets/images_login_fresh_34_/icon_user.png",
+                              "./assets/icon_user.png",
                               package: 'siti',
                               width: 15,
                               height: 15,
@@ -202,7 +206,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "assets/images_login_fresh_34_/icon_password.png",
+                              "./assets/images_login_fresh_34_/icon_password.png",
                               package: 'siti',
                               width: 15,
                               height: 15,
@@ -230,7 +234,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                                   : Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Image.asset(
-                                        "assets/images_login_fresh_34_/icon_eye_open.png",
+                                        "assets/icon_eye_open.png",
                                         package: 'siti',
                                         width: 15,
                                         height: 15,
@@ -263,12 +267,33 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                         ),
                       )
                     : GestureDetector(
-                        onTap: () {
+                        onTap: () async{
+
+                          final url =  Uri.http("192.168.0.178:5000", "/login");
+                          final response = await http.post(url, body: json.encode({
+                            "Email" : this._textEditingControllerUser.text,
+                            "Password" : this._textEditingControllerPassword.text
+                          }));
+
+                          var response2 = await http.get(Uri.http('192.168.0.178:5000', '/login'));
+                          var decoded = jsonDecode(response2.body) as Map<String, dynamic>;
+                          var status = decoded['status'];
+                          print('0------------------------------------------------------->   $status');
+
+                          if (status){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => GaugeApp()),
+                            );
+                          }
+
                           widget.callLogin(
                               context,
                               setIsRequest,
                               this._textEditingControllerUser.text,
-                              this._textEditingControllerPassword.text);
+                              this._textEditingControllerPassword.text,
+                          );
+
                         },
                         child: SizedBox(
                             height: MediaQuery.of(context).size.height * 0.07,
@@ -279,7 +304,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                                   borderRadius: BorderRadius.circular(40),
                                 ),
                                 color:
-                                    widget.backgroundColor ?? Color(0xFFE7004C),
+                                    widget.backgroundColor ??  Color(0xFFE7004C),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10),
@@ -374,4 +399,5 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
       this.isRequest = isRequest;
     });
   }
+
 }

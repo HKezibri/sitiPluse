@@ -81,23 +81,19 @@ class _MyAppState extends State<MyApp> {
           String password) {
         isRequest(true);
 
-        Future.delayed(Duration(seconds: 2), () async {
+        Future.delayed(Duration(seconds: 2), ()  {
 
-          final url =  Uri.http("192.168.0.178:5000", "/log");
-          final response = await http.post(url, body: json.encode({"Email" : user, "Password" : password}));
 
-          var response2 = await http.get(Uri.http('192.168.0.178:5000', '/log'));
-          var decoded = jsonDecode(response2.body) as Map<String, dynamic>;
-          var status = decoded['status'];
-          print('0------------------------------------------------------->   $status');
 
-          if (status == true){
+                 /*
+          if (status){
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => GaugeApp()),
             );
-          }
+          }  */
 
+          
           print('-------------- function call------------- ');
           print(user);
           print(password);
@@ -159,7 +155,7 @@ class _MyAppState extends State<MyApp> {
           print(signUpModel.repeatPassword);
           print(signUpModel.surname);
           print(signUpModel.name);
-
+                
           isRequest(false);
         });
   }
