@@ -25,7 +25,9 @@ dependencies:
     sdk: flutter
   mqtt_client: ^9.2.0
   syncfusion_flutter_gauges: ^19.1.58
+  syncfusion_flutter_charts: ^19.1.59
   flutter_icons: ^1.1.0
+
 
 
 
