@@ -177,7 +177,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 400,
                       height: 250,
                       child: SfCartesianChart(),
-                    )
+                    ),
+                   /* Container(
+                      width: 400,
+                      height: 250,
+                      child: SfCartesianChart(),
+                    )*/
 
                     ],
           )),
