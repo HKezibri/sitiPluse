@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:siti/login_fresh.dart';
 import 'package:flutter/material.dart';
 import 'package:siti/mqtt_client/mqtt_client.dart';
@@ -83,7 +83,17 @@ class _MyAppState extends State<MyApp> {
 
         Future.delayed(Duration(seconds: 2), ()  {
 
+<<<<<<< HEAD
 
+=======
+          final url =  Uri.http("192.168.1.6:5000", "/log");
+          final response = await http.post(url, body: json.encode({"Email" : user, "Password" : password}));
+
+          var response2 = await http.get(Uri.http('192.168.1.6:5000', '/log'));
+          var decoded = jsonDecode(response2.body) as Map<String, dynamic>;
+          var status = decoded['status'];
+          print('0------------------------------------------------------->   $status');
+>>>>>>> origin/hiba
 
                  /*
           if (status){
@@ -192,5 +202,14 @@ class LoginSignupUI extends StatelessWidget {
 }
 
  */
+
+
+ */
+import 'package:flutter/material.dart';
+import 'package:siti/dashboard/dashboard.dart';
+void main() {
+  runApp(GaugeApp());
+}
+
 
 
