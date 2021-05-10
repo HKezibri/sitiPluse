@@ -50,7 +50,6 @@ class _MyAppState extends State<MyApp> {
             // develop what they want the Apple to do when the user clicks
           },
           logo: TypeLogo.apple),
-
        */
       LoginFreshTypeLoginModel(
           callFunction: (BuildContext _buildContext) {
@@ -85,7 +84,7 @@ class _MyAppState extends State<MyApp> {
 
 
 
-                 /*
+          /*
           if (status){
             Navigator.push(
               context,
@@ -93,7 +92,7 @@ class _MyAppState extends State<MyApp> {
             );
           }  */
 
-          
+
           print('-------------- function call------------- ');
           print(user);
           print(password);
@@ -155,7 +154,7 @@ class _MyAppState extends State<MyApp> {
           print(signUpModel.repeatPassword);
           print(signUpModel.surname);
           print(signUpModel.name);
-                
+
           isRequest(false);
         });
   }
@@ -173,14 +172,11 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:siti/screen/login_signup.dart';
-
 void main() {
   runApp(LoginSignupUI());
 }
-
 class LoginSignupUI extends StatelessWidget {
   const LoginSignupUI({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -190,7 +186,5 @@ class LoginSignupUI extends StatelessWidget {
     );
   }
 }
-
  */
-
 
