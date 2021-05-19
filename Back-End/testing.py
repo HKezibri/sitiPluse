@@ -93,3 +93,11 @@ server.login("abdouelaaroub@gmail.com", "AbdouDUT05")
 server.sendmail("abdouelaaroub@gmail.com", "kezibri.hiba@gmail.com", "Hi Hiba, jsut sending email test using python")
 server.quit()
 """
+
+
+allTopics = mongo.db.counter.find({"topic" : "F01/R01/M02/counter"})
+listDay = []
+for ind, e in enumerate(allTopics):
+    print(e, '  ==>  ', ind)
+    #print(e["date"].month)
+
