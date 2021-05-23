@@ -5,6 +5,10 @@ import 'login_fresh_loading.dart';
 import 'package:siti/dashboard/dashboard.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // as convert
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
+import 'dart:io';
+import 'package:siti/mqtt_client/mqtt_client.dart';
 
 class LoginFreshUserAndPassword extends StatefulWidget {
   final Color backgroundColor;
@@ -54,7 +58,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
   final focus = FocusNode();
 
   final bool isLoginRequest = false;
-
+  MqttClient client;
   LoginFreshWords loginFreshWords;
 
   @override
