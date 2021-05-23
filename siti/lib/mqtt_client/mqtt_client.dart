@@ -4,7 +4,7 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-Future<MqttClient> connect()  async {
+Future<MqttClient> connect() async {
   var payload;
   MqttServerClient client =
   MqttServerClient.withPort('144.91.113.92', 'flutter_client', 1883);
