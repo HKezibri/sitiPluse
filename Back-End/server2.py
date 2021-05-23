@@ -87,7 +87,7 @@ def handle_mqtt_message(client, userdata, message):
             'payload':message.payload.decode(), 
             'date': datetime.datetime.utcnow()
         })
-    
+
 
     print(data ,' ==>  ', datetime.datetime.utcnow())
     

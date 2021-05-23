@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:siti/justifications/justification.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:responsive_grid/responsive_grid.dart';
@@ -70,11 +71,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     alignment: Alignment(0, 0),
                     //color: Colors.blue,
                     child: RaisedButton(onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DataTableDemo()),
+                      );
                       print("-------------------------------------------- ok");
 
                       //connect().then((value) => client = value);
-                      var K = client?.subscribe(topic, MqttQos.atLeastOnce);
-                      print('****************>> $K');
+                      //var K = client?.subscribe(topic, MqttQos.atLeastOnce);
+                      //print('****************>> $K');
 
                       },
                         color: Colors.green,
