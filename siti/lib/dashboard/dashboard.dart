@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:siti/justifications/justification.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -8,14 +9,23 @@ import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'dart:io';
 import 'package:siti/mqtt_client/mqtt_client.dart';
+import 'package:provider/provider.dart ';
+import 'package:siti/mqtt_client/mqttC.dart';
 class GaugeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Radial Gauge Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: MyHomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Radial Gauge Demo',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: MyHomePage(),
+      ),
     );
   }
 }
@@ -34,7 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    connect().then((value) => client = value);
+    final pay = Provider.of<MQTTManager>(context);
+
+    //connect().then((value) => client = value);
 
     return Scaffold(
       appBar: AppBar(title: const Text('SitiPlus Dashboard')),
@@ -60,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment(0, 0),
                   //color: Colors.green,
 
-                  child: Text("Arrets \r\n \t 00", style: TextStyle(fontSize: 23.0)),
+                  child: Text("Arrets \r\n \t ${pay.payload}", style: TextStyle(fontSize: 23.0)),
                 ),
               ),
               ResponsiveGridCol(
@@ -71,12 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     alignment: Alignment(0, 0),
                     //color: Colors.blue,
                     child: RaisedButton(onPressed: (){
+                      /*
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DataTableDemo()),
                       );
+                       */
                       print("-------------------------------------------- ok");
-
+                      pay.connect();
                       //connect().then((value) => client = value);
                       //var K = client?.subscribe(topic, MqttQos.atLeastOnce);
                       //print('****************>> $K');
@@ -124,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                         annotations: <GaugeAnnotation>[
                           GaugeAnnotation(axisValue: 50,angle: 90, positionFactor: 0.3,
-                              widget: Text("90", style:
+                              widget: Text(pay.payload.toString(), style:
                               TextStyle(fontWeight: FontWeight.bold, fontSize: 20),))]
                     )
                     ],

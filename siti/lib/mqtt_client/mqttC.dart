@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-class MQTTManager extends ChangeNotifier {
-  dynamic payload;
+class MQTTManager with ChangeNotifier {
+  dynamic payload = "00";
   MqttServerClient client = MqttServerClient.withPort('144.91.113.92', 'flutter_client', 1883);
   void initialize() async{
     client.logging(on: false);
@@ -19,7 +19,6 @@ class MQTTManager extends ChangeNotifier {
       .withClientIdentifier("siti")
       .authenticateAs("siti", "siti@2021")
       .keepAliveFor(21600)
-
       .startClean()
       .withWillQos(MqttQos.atLeastOnce);
 
@@ -34,24 +33,31 @@ class MQTTManager extends ChangeNotifier {
 
     if (client.connectionStatus.state == MqttConnectionState.connected) {
       print('Client connected.*************************************.');
+      onSubscribed("F01/R01/M01/flow");
       client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
         final MqttPublishMessage message = c[0].payload;
         payload =
             MqttPublishPayload.bytesToStringAsString(message.payload.message);
-        print(payload);
+        updateState();
+        print("===================>  in mqtt manager  :      $payload");
 
       });
 
     } else {
       print(
           'Connection failed - disconnecting, status is ${client.connectionStatus}');
-      client.disconnect();
+      //client.disconnect();
 
     }
   }
 
   void onSubscribed(String topic) {
     client.unsubscribe(topic);
+  }
+  void onConnected(){
+    client.onConnected();
+    onSubscribed("F01/R01/M01/flow");
+    updateState();
   }
   void updateState() {
     notifyListeners();
