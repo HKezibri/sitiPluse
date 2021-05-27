@@ -79,7 +79,7 @@ def handle_mqtt_message(client, userdata, message):
         payload=message.payload.decode()
     )
     
-    if int(datetime.datetime.utcnow().hour) >= 9 and int(datetime.datetime.utcnow().hour) <= 16:
+    if int(datetime.datetime.utcnow().hour) >= 8 and int(datetime.datetime.utcnow().hour) <= 16:
         lastId = getLastIdCounter()
         mongo.db.counter.insert_one({
             "_id": lastId,
@@ -88,7 +88,7 @@ def handle_mqtt_message(client, userdata, message):
             'date': datetime.datetime.utcnow()
         })
         
-
+    
     print(data ,' ==>  ', datetime.datetime.utcnow())
     
 

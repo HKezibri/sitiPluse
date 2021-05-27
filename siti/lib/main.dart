@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   LoginFresh buildLoginFresh() {
     List<LoginFreshTypeLoginModel> listLogin = [
+
       LoginFreshTypeLoginModel(
           callFunction: (BuildContext _buildContext) {
             // develop what they want the facebook to do when the user clicks

@@ -16,7 +16,6 @@ Future<MqttClient> connect() async {
       .withClientIdentifier("siti")
       .authenticateAs("siti", "siti@2021")
       .keepAliveFor(21600)
-
       .startClean()
       .withWillQos(MqttQos.atLeastOnce);
   client.connectionMessage = connMess;

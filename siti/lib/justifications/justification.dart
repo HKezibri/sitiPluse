@@ -22,13 +22,71 @@ class DataTableDemoState extends State<DataTableDemo> {
     users = User.getUsers();
     super.initState();
   }
+  List<String> ratingList = <String>["le rouleau est terminé", "probleme mecanique", "Le thé est terminé ", 'Autre'];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Justification des arrets'),
+        ),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: DataTable(
+            columns: [
+              DataColumn(
+                label: Text("FIRST NAME"),
+                numeric: false,
+                tooltip: "This is First Name",
+              ),
+              DataColumn(
+                label: Text("LAST NAME"),
+                numeric: false,
+                tooltip: "This is Last Name",
+              ),
+              DataColumn(
+                label: Text("RATING"),
+                numeric: false,
+                tooltip: "This is their rating.",
+              ),
+            ],
+            rows: users
+                .map(
+                  (user) => DataRow(cells: [
+                DataCell(
+                  Text(user.debut),
+                ),
+                DataCell(
+                  Text(user.fin),
+                ),
+                DataCell(DropdownButton<String>(
+                  value: user.justification,
+                  onChanged: (String newValue) {
+                    setState(() {
+                      //help!
+                    });
+                  },
+                  items: ratingList
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ))
+              ]),
+            )
+                .toList(),
+          ),
+        ));
+  }
 
   onSortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
       if (ascending) {
-        users.sort((a, b) => a.firstName.compareTo(b.firstName));
+        users.sort((a, b) => a.debut.compareTo(b.fin));
       } else {
-        users.sort((a, b) => b.firstName.compareTo(a.firstName));
+        users.sort((a, b) => b.debut.compareTo(a.fin));
       }
     }
   }
@@ -64,9 +122,9 @@ class DataTableDemoState extends State<DataTableDemo> {
         sortColumnIndex: 0,
         columns: [
           DataColumn(
-              label: Text("FIRST NAME"),
+              label: Text("DEBUT DE L'ARRET"),
               numeric: false,
-              tooltip: "This is First Name",
+              tooltip: "This is the start time",
               onSort: (columnIndex, ascending) {
                 setState(() {
                   sort = !sort;
@@ -74,9 +132,9 @@ class DataTableDemoState extends State<DataTableDemo> {
                 onSortColum(columnIndex, ascending);
               }),
           DataColumn(
-            label: Text("LAST NAME"),
+            label: Text("FIN DE L'ARRET"),
             numeric: false,
-            tooltip: "This is Last Name",
+            tooltip: "This is the end time",
           ),
         ],
         rows: users
@@ -89,13 +147,13 @@ class DataTableDemoState extends State<DataTableDemo> {
               },
               cells: [
                 DataCell(
-                  Text(user.firstName),
+                  Text(user.debut),
                   onTap: () {
-                    print('Selected ${user.firstName}');
+                    print('Selected ${user.debut}');
                   },
                 ),
                 DataCell(
-                  Text(user.lastName),
+                  Text(user.fin),
                 ),
               ]),
         )
@@ -103,7 +161,7 @@ class DataTableDemoState extends State<DataTableDemo> {
       ),
     );
   }
-
+/*
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,6 +203,5 @@ class DataTableDemoState extends State<DataTableDemo> {
         ],
       ),
     );
-  }
+  }*/
 }
-
