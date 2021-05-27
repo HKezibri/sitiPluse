@@ -75,10 +75,23 @@ class MQTTManager with ChangeNotifier {
 
   String getPaload() => payload;
 
+  List<SalesData> chartData = [];
   void second() {
-
-    s = DateTime.now().minute.toString();
+    var p = double.parse(this.payload);
+    s = DateTime.now().hour.toString() + ":"
+      + DateTime.now().minute.toString() + ":"
+      + DateTime.now().second.toString();
+    chartData.add(
+        SalesData(s, p)
+    );
     updateState();
 
   }
+
+}
+
+class SalesData{
+  SalesData(this.time, this.production);
+  final String time;
+  final double production;
 }
