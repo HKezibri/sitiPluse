@@ -95,9 +95,11 @@ server.quit()
 """
 
 
-allTopics = mongo.db.counter.find({"topic" : "F01/R01/M02/counter"})
+allTopics = mongo.db.counter.find({"topic" : "F01/R01/M01/counter"})
 listDay = []
-for ind, e in enumerate(allTopics):
-    print(e, '  ==>  ', ind)
+for e in allTopics:
+    #print(e, '  ==>  ')
     #print(e["date"].month)
-
+    listDay.append(e['date'])
+print(len(listDay))
+print(str(listDay[20] - listDay[0]).split('.')[0])

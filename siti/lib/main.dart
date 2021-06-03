@@ -27,31 +27,21 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          brightness: Brightness.dark,
         ),
+
         home: Scaffold(body: buildLoginFresh()));
   }
 
   LoginFresh buildLoginFresh() {
     List<LoginFreshTypeLoginModel> listLogin = [
-
+      /*
       LoginFreshTypeLoginModel(
           callFunction: (BuildContext _buildContext) {
             // develop what they want the facebook to do when the user clicks
           },
           logo: TypeLogo.facebook),
-      LoginFreshTypeLoginModel(
-          callFunction: (BuildContext _buildContext) {
-            // develop what they want the Google to do when the user clicks
-          },
-          logo: TypeLogo.google),
-      /*
-      LoginFreshTypeLoginModel(
-          callFunction: (BuildContext _buildContext) {
-            print("APPLE");
-            // develop what they want the Apple to do when the user clicks
-          },
-          logo: TypeLogo.apple),
-       */
+      */
       LoginFreshTypeLoginModel(
           callFunction: (BuildContext _buildContext) {
             Navigator.of(_buildContext).push(MaterialPageRoute(
@@ -59,6 +49,14 @@ class _MyAppState extends State<MyApp> {
             ));
           },
           logo: TypeLogo.userPassword),
+      /*
+      LoginFreshTypeLoginModel(
+          callFunction: (BuildContext _buildContext) {
+            // develop what they want the Google to do when the user clicks
+          },
+          logo: TypeLogo.google),
+      */
+
     ];
 
     return LoginFresh(

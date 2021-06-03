@@ -90,7 +90,7 @@ class _LoginFreshState extends State<LoginFresh> {
               height: MediaQuery.of(context).size.height * 0.55,
               width: MediaQuery.of(context).size.width,
               decoration: new BoxDecoration(
-                  color: widget.cardColor ?? Color(0xFFF3F3F5),
+                  color: widget.cardColor ?? Colors.white,
                   borderRadius: new BorderRadius.only(
                     topLeft: const Radius.circular(50.0),
                     topRight: const Radius.circular(50.0),
@@ -109,7 +109,7 @@ class _LoginFreshState extends State<LoginFresh> {
                               widget.isExploreApp == false)
                           ? SizedBox()
                           : SizedBox(
-                              height: 20,
+                              height: 40,
                             ),
                       buildExploreApp(context),
                       (widget.isSignUp == null || widget.isSignUp == false)
@@ -137,14 +137,14 @@ class _LoginFreshState extends State<LoginFresh> {
             TextSpan(
                 text: widget.keyWord.notAccount + '\n',
                 style: TextStyle(
-                    color: widget.textColor ?? Color(0xFF0F2E48),
+                    color: widget.textColor ?? Colors.white,
                     fontWeight: FontWeight.normal,
                     fontSize: 15)),
             TextSpan(
                 text: widget.keyWord.signUp,
                 style: TextStyle(
                     decoration: TextDecoration.underline,
-                    color: widget.textColor ?? Color(0xFF0F2E48),
+                    color: widget.textColor ?? Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 16)),
           ]),
@@ -191,8 +191,8 @@ class _LoginFreshState extends State<LoginFresh> {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.1,
       width: (widget.typeLoginModel.length > 3)
-          ? MediaQuery.of(context).size.width * 0.90
-          : MediaQuery.of(context).size.width * 0.80,
+          ? MediaQuery.of(context).size.width * 0.25
+          : MediaQuery.of(context).size.width * 0.25,
       child: Card(
         elevation: 10,
         shape: RoundedRectangleBorder(

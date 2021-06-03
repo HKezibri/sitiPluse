@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../config/language.dart';
 import 'login_fresh_loading.dart';
-import 'package:siti/dashboard/dashboard.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // as convert
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'dart:io';
 import 'package:siti/mqtt_client/mqtt_client.dart';
+import 'package:siti/tableHome/table.dart';
+
+import 'package:siti/views/mainH.dart';
 
 class LoginFreshUserAndPassword extends StatefulWidget {
   final Color backgroundColor;
@@ -260,8 +262,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                                       Color(0xFFE7004C))),
                           hintText: this.loginFreshWords.hintLoginPassword)),
                 ),
-                (this.isRequest)
-                    ? Padding(
+                if (this.isRequest) Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: LoadingLoginFresh(
                           textLoading: this.loginFreshWords.textLoading,
@@ -269,8 +270,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           backgroundColor: widget.backgroundColor,
                           elevation: 0,
                         ),
-                      )
-                    : GestureDetector(
+                      ) else GestureDetector(
                         onTap: () async{
 
                           final url =  Uri.http("192.168.0.178:5000", "/login");
@@ -287,7 +287,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           if (status){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => GaugeApp()),
+                              MaterialPageRoute(builder: (context) => MyApp1()),
                             );
                           }
 
@@ -297,7 +297,6 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                               this._textEditingControllerUser.text,
                               this._textEditingControllerPassword.text,
                           );
-
                         },
                         child: SizedBox(
                             height: MediaQuery.of(context).size.height * 0.07,

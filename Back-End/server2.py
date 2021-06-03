@@ -22,6 +22,29 @@ app.config['MQTT_KEEPALIVE'] = 30
 
 mqtt = Mqtt(app)
 
+global Breaks, breaksDateDebut
+Breaks = {
+    "F01/R01/M01" :  [],
+    "F01/R01/M02" :  [],
+    "F01/R01/M03" :  [],
+    "F01/R01/M04" :  [],
+    "F01/R01/M05" :  [],
+    "F01/R01/M06" :  [],
+    "F01/R01/M07" :  [],
+    "F01/R01/M08" :  [],
+    "F01/R01/M09" :  []
+}
+breaksDateDebut = {
+    "F01/R01/M01" :  0,
+    "F01/R01/M02" :  0,
+    "F01/R01/M03" :  0,
+    "F01/R01/M04" :  0,
+    "F01/R01/M05" :  0,
+    "F01/R01/M06" :  0,
+    "F01/R01/M07" :  0,
+    "F01/R01/M08" :  0,
+    "F01/R01/M09" :  0
+}
 
 # -- connect to mqtt brocker
 @mqtt.on_connect()
@@ -67,7 +90,7 @@ def sendmail(mail):
     server.login("abdouelaaroub@gmail.com", "AbdouDUT05")
     server.sendmail("abdouelaaroub@gmail.com", mail, email)
     server.quit()
-    print(email, "/////////////////////////////////////////////////////////")
+    print(email)
     return pwd
 
 # -- mqtt messages & inserssion in database
@@ -88,15 +111,20 @@ def handle_mqtt_message(client, userdata, message):
             'date': datetime.datetime.utcnow()
         })
         
-    
+         
+
     print(data ,' ==>  ', datetime.datetime.utcnow())
     
 
+@app.route('/breaks')
+def breakMethode() :
+    print('===>        Breaks          <===')
+    return jsonify({"F01/R01/M01" :  [["12:59:00", "13:05:00", 6], ["14:00:00", "14:11:00", 11]] 
+    })
 
 # -- add topic api
 @app.route('/topic/add', methods = ["Get", "POST"])
 def addTopic():
-
     topics = mongo.db.topics.find()
     allTopics = [e['topic'] for e in topics]
     id = getLastIdTopic()
@@ -158,6 +186,7 @@ def Login():
         session["Email"] = User["Email"]
         session["Password"] = User["Password"]
         session["Role"] = User["Role"]
+
         return jsonify({
             "status" : True,
             "Name" : User["Name"],
