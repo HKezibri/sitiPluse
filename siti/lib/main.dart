@@ -81,17 +81,6 @@ class _MyAppState extends State<MyApp> {
 
         Future.delayed(Duration(seconds: 2), ()  {
 
-
-
-          /*
-          if (status){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => GaugeApp()),
-            );
-          }  */
-
-
           print('-------------- function call------------- ');
           print(user);
           print(password);

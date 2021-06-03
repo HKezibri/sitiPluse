@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './login_fresh_loading.dart';
+import 'login_fresh_loading.dart';
 import '../config/language.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // as convert
@@ -145,7 +145,7 @@ class _LoginFreshResetPasswordState extends State<LoginFreshResetPassword> {
                       prefixIcon: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(
-                          "assets/icon_user.png",
+                          "../../assets/icon_user.png",
                           package: 'siti',
                           width: 15,
                           height: 15,

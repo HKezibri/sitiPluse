@@ -27,7 +27,7 @@ class LoginFreshWords {
       this.hintLoginUser = 'E-mail..',
       this.login = 'Login',
       this.exploreApp = 'Explore App',
-      this.notAccount = 'You dot not have an account ?',
-      this.signUp = 'Sign Up',
+      this.notAccount = '',
+      this.signUp = '',
       this.textLoading = 'please wait ...'});
 }

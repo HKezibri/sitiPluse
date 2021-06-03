@@ -34,6 +34,7 @@ class _EditablePageState extends State<EditablePage2> {
       rows: getRows(machines),
 
     );
+
   }
 
   List<DataColumn> getColumns(List<String> columns) {
@@ -76,9 +77,8 @@ class _EditablePageState extends State<EditablePage2> {
   Future editCause(Machine editMachine) async {
     final cause = await showTextDialog(
       context,
-      title: "Entrer la cause de l'arret",
+      title: "Sélectionner la cause de l'arret",
       value: editMachine.cause,
-
 
     );
 
@@ -91,19 +91,7 @@ class _EditablePageState extends State<EditablePage2> {
     }).toList());
   }
 
-/*Future editLastName(User editUser) async {
-    final lastName = await showTextDialog(
-      context,
-      title: 'Change Last Name',
-      value: editUser.lastName,
-    );
 
-    setState(() => users = users.map((user) {
-          final isEditedUser = user == editUser;
-
-          return isEditedUser ? user.copy(lastName: lastName) : user;
-        }).toList());
-  }*/
 }
 
 

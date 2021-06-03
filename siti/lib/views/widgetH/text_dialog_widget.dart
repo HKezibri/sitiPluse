@@ -24,32 +24,58 @@ class TextDialogWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TextDialogWidgetState createState() => _TextDialogWidgetState();
+  _DropDownDemoState createState() => _DropDownDemoState();
 }
 
-class _TextDialogWidgetState extends State<TextDialogWidget> {
-  TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller = TextEditingController(text: widget.value);
-  }
+class _DropDownDemoState extends State<TextDialogWidget>  {
+  String _chosenValue;
 
   @override
   Widget build(BuildContext context) => AlertDialog(
     title: Text(widget.title),
-    content: TextField(
+    content: DropdownButton<String>(
+      value: _chosenValue,
+      //elevation: 5,
+      style: TextStyle(color: Colors.black),
+
+      items: <String>[
+        'HS',
+        'PT',
+        'RT',
+        'MP'
+      ].map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      hint: Text(
+        "Cause ? ",
+        style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w600),
+      ),
+      onChanged: (String value) {
+        setState(() {
+          _chosenValue = value;
+        });
+      },
+    ),
+
+    /*TextField(
       controller: controller,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
       ),
-    ),
+    ),*/
     actions: [
       ElevatedButton(
         child: Text('Done'),
-        onPressed: () => Navigator.of(context).pop(controller.text),
+        onPressed: () {
+          print('value is  *------------------------> $_chosenValue');
+          Navigator.of(context).pop(_chosenValue);
+        }
       )
     ],
   );

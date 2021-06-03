@@ -105,6 +105,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           child: Image.asset(
                             widget.logo,
                             fit: BoxFit.contain,
+                            height: 118,
                           ),
                         ),
                       ),
@@ -169,7 +170,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "./assets/icon_user.png",
+                              "../../assets/icon_user.png",
                               package: 'siti',
                               width: 15,
                               height: 15,
@@ -177,7 +178,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(color: Color(0xFFAAB5C3))),
+                              borderSide: BorderSide(color: Colors.red)),
                           filled: true,
                           fillColor: Color(0xFFF3F3F5),
                           focusColor: Color(0xFFF3F3F5),
@@ -212,7 +213,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "./assets/images_login_fresh_34_/icon_password.png",
+                              "../../assets/icon_password.png",
                               package: 'siti',
                               width: 15,
                               height: 15,
@@ -231,24 +232,26 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                                   ? Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Image.asset(
-                                        "assets/images_login_fresh_34_/icon_eye_close.png",
+                                        "../../assets/icon_eye_close.png",
                                         package: 'siti',
                                         width: 15,
-                                        height: 15,
+                                        height: 12,
+                                        //color: Colors.black,
                                       ),
                                     )
                                   : Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Image.asset(
-                                        "assets/icon_eye_open.png",
+                                        "../../assets/icon_eye_open.png",
                                         package: 'siti',
                                         width: 15,
-                                        height: 15,
+                                        height: 12,
+                                        //color: Colors.black,
                                       ),
                                     )),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(color: Color(0xFFAAB5C3))),
+                              borderSide: BorderSide(color: Colors.red)),
                           filled: true,
                           fillColor: Color(0xFFF3F3F5),
                           focusColor: Color(0xFFF3F3F5),

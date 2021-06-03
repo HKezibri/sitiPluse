@@ -20,7 +20,7 @@ class LoginFreshFooter extends StatelessWidget {
         child: GestureDetector(
       onTap: this.funFooterLogin,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -29,17 +29,15 @@ class LoginFreshFooter extends StatelessWidget {
             Align(
               alignment: FractionalOffset.bottomCenter,
               child: Text(
-                this.text + '  ',
+                this.text + '  SitiPlus' ,
                 style: TextStyle(
                   color: this.textColor ?? Color(0xFF0F2E48),
-                  fontSize: 13,
+                  fontSize: 15,
+
                 ),
               ),
             ),
-            Image.asset(
-              this.logo,
-              width: 120,
-            ),
+
           ],
         ),
       ),

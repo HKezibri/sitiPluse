@@ -24,10 +24,6 @@ class _DropDownDemoState extends State<DropDownDemo> {
               'Android',
               'IOS',
               'Flutter',
-              'Node',
-              'Java',
-              'Python',
-              'PHP',
             ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
