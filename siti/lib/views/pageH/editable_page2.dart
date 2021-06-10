@@ -27,7 +27,7 @@ class _EditablePageState extends State<EditablePage2> {
   );
 
   Widget buildDataTable() {
-    final columns = ['Debut', 'Temps Total', 'Cause'];
+    final columns = ["Topic       &\nTemps d'arrêt", 'Temps\n Total', "Cause\nD'arrêt"];
 
     return DataTable(
       columns: getColumns(columns),

@@ -30,6 +30,7 @@ dependencies:
   responsive_grid: ^2.0.0
   syncfusion_flutter_datagrid: ^19.1.59-beta
   provider: ^5.0.0
+  flutter_shine: ^0.0.5
 
 
 

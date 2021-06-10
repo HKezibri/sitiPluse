@@ -4,20 +4,16 @@ import 'package:flutter/material.dart';
 
 
 final allMachines = <Machine>[
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7.5 min', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7.5 min', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7.5 min', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7.5 min', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7.5 min', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7.5 min', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7min 30s', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7min 30s', cause: ""),
-  Machine(debut: 'F01/R01/M02 \n9:35:00 - 9:37:30', total: '9min 30s', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7min 30s', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7min 30s', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7min 30s', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7min 30s', cause: ""),
-  Machine(debut: 'F01/R01/M01 \n9:30:00 - 9:37:30', total: '7min 30s', cause: ""),
+  Machine(debut: 'F01/R01/M01 \ndu 9:30 à 9:33', total: '3 min', cause: ""),
+  Machine(debut: 'F01/R01/M01 \ndu 9:52 à 9:56', total: '4 min', cause: ""),
+  Machine(debut: 'F01/R01/M01 \ndu 9:59 à 10:04', total: '5 min', cause: ""),
+  Machine(debut: 'F01/R01/M01 \ndu 10:23 à 10:27', total: '4 min', cause: ""),
+  Machine(debut: 'F01/R01/M01 \ndu 10:53 à 10:56', total: '3 min', cause: ""),
+  Machine(debut: 'F01/R01/M01 \ndu 12:30 à 12:34', total: '4 min', cause: ""),
+  Machine(debut: 'F01/R01/M01 \ndu 13:11 à 13:19', total: '5 min', cause: ""),
+  Machine(debut: 'F01/R01/M02 \ndu 14:30 à 14:35', total: '5 min', cause: ""),
+  Machine(debut: 'F01/R01/M02 \ndu 9:30 à 9:36', total: '6 min', cause: ""),
+
 ];
 
 

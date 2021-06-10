@@ -4,15 +4,11 @@ import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
 
-class MQTTManager with ChangeNotifier {
+
+class MQTTManager4 with ChangeNotifier {
   dynamic payload = "000";
-  dynamic payload2 = "000";
-
-  int breaks = 0;
-  //DateTime now  =  DateTime.now();
+  String isConnected = 'Non';
   String s = '';
 
   MqttServerClient client;
@@ -35,24 +31,23 @@ class MQTTManager with ChangeNotifier {
     client.connectionMessage = connMess;
     try {
       await client.connect();
-      //print('connected :)');
+      client.subscribe("F01/R01/M04/flow", MqttQos.atLeastOnce);
     } catch (e) {
       print('Exception: ');
     }
     if (client.connectionStatus.state == MqttConnectionState.connected) {
-      //print('Client connected.-                    <--');
-      client.subscribe("F01/R01/M01/flow", MqttQos.atLeastOnce);
-      //print('ok >>>');
+
       client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
         final MqttPublishMessage message = c[0].payload;
         this.payload =
             MqttPublishPayload.bytesToStringAsString(message.payload.message);
-
         updateState();
       });
+      isConnected = 'Oui';
 
     } else {
       print('Connection failed - disconnecting, ////////');
+      isConnected = 'Non';
     }
   }
 
@@ -60,14 +55,12 @@ class MQTTManager with ChangeNotifier {
 
 
   void onSubscribed(String topic){
-    //_topic = topic;
     client.subscribe(topic, MqttQos.atLeastOnce);
     print('subscribed to ==+>  $topic');
   }
 
   void onConnected(){
     client.onConnected();
-
     updateState();
   }
 
@@ -79,7 +72,7 @@ class MQTTManager with ChangeNotifier {
   String getPaload() => payload;
 
 
-  List<SalesData> chartData = [];
+  List<SalesData4> chartData = [];
   void second() {
 
     var p = double.parse(this.payload);
@@ -88,7 +81,7 @@ class MQTTManager with ChangeNotifier {
         + DateTime.now().second.toString() + " ";
 
     chartData.add(
-        SalesData(s, p)
+        SalesData4(s, p)
     );
     updateState();
   }
@@ -96,21 +89,13 @@ class MQTTManager with ChangeNotifier {
     chartData.clear();
   }
 
-  void incrBreaks(String topic) async {
-
-    var response = await http.get(Uri.http('192.168.0.178:5000', '/breaks'));
-    var breaksAPI = jsonDecode(response.body) as Map<String, dynamic>;
-    breaks =  breaksAPI[topic].length;
-    //print('////////////////////////         $breaks');
-  }
 
 }
 
 
 
-
-class SalesData{
-  SalesData(this.time, this.production);
+class SalesData4{
+  SalesData4(this.time, this.production);
   final String time;
   final double production;
 }

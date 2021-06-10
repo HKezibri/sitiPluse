@@ -19,6 +19,7 @@ class MyApp1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+
         debugShowCheckedModeBanner: false,
         title: title,
         theme: ThemeData(primarySwatch: Colors.deepOrange),

@@ -102,4 +102,4 @@ for e in allTopics:
     #print(e["date"].month)
     listDay.append(e['date'])
 print(len(listDay))
-print(str(listDay[20] - listDay[0]).split('.')[0])
+print(int(str(listDay[6] - listDay[0]).split(':')[1]))

@@ -69,7 +69,14 @@ class _LoginFreshState extends State<LoginFresh> {
     return Stack(
       children: [
         Container(
-          color: widget.backgroundColor ?? Color(0xFFE7004C),
+          //color: widget.backgroundColor ?? Colors.lightGreen[500],
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.lightBlueAccent[100], Colors.green[800]],
+              begin: Alignment.topRight,
+              end: Alignment.topLeft,
+            ),
+          ),
           child: Align(
             alignment: Alignment.topCenter,
             child: Container(
@@ -196,11 +203,11 @@ class _LoginFreshState extends State<LoginFresh> {
       child: Card(
         elevation: 10,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(10),
         ),
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 9),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -228,7 +235,7 @@ class _LoginFreshState extends State<LoginFresh> {
     for (LoginFreshTypeLoginModel tlm in widget.typeLoginModel) {
       list.add(GestureDetector(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           child: Image(
             image: ExactAssetImage(
               tlm.logo,

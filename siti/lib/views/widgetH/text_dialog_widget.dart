@@ -42,7 +42,7 @@ class _DropDownDemoState extends State<TextDialogWidget>  {
         'HS',
         'PT',
         'RT',
-        'MP'
+
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

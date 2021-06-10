@@ -8,7 +8,6 @@ import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'dart:io';
 import 'package:siti/mqtt_client/mqtt_client.dart';
-import 'package:siti/tableHome/table.dart';
 
 import 'package:siti/views/mainH.dart';
 
@@ -72,7 +71,8 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
     return Scaffold(
       appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: widget.backgroundColor ?? Color(0xFFE7004C),
+          backgroundColor: widget.backgroundColor ?? Colors.lightGreen[700],
+
           centerTitle: true,
           elevation: 0,
           title: Text(
@@ -89,7 +89,8 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.7,
               width: MediaQuery.of(context).size.width,
-              color: widget.backgroundColor ?? Color(0xFFE7004C),
+              color: widget.backgroundColor ?? Colors.lightGreen[700],
+
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,7 +179,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(color: Colors.red)),
+                              borderSide: BorderSide(color: Colors.lightGreen[700])),
                           filled: true,
                           fillColor: Color(0xFFF3F3F5),
                           focusColor: Color(0xFFF3F3F5),
@@ -189,7 +190,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
                                   color: widget.backgroundColor ??
-                                      Color(0xFFE7004C))),
+                                      Colors.lightGreen[700])),
                           hintText: this.loginFreshWords.hintLoginUser)),
                 ),
                 Padding(
@@ -251,7 +252,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                                     )),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(color: Colors.red)),
+                              borderSide: BorderSide(color: Colors.lightGreen[700])),
                           filled: true,
                           fillColor: Color(0xFFF3F3F5),
                           focusColor: Color(0xFFF3F3F5),
@@ -262,7 +263,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
                                   color: widget.backgroundColor ??
-                                      Color(0xFFE7004C))),
+                                      Colors.lightGreen[700])),
                           hintText: this.loginFreshWords.hintLoginPassword)),
                 ),
                 if (this.isRequest) Padding(
@@ -310,7 +311,7 @@ class _LoginFreshUserAndPasswordState extends State<LoginFreshUserAndPassword> {
                                   borderRadius: BorderRadius.circular(40),
                                 ),
                                 color:
-                                    widget.backgroundColor ??  Color(0xFFE7004C),
+                                    widget.backgroundColor ??  Colors.lightGreen[700],
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10),

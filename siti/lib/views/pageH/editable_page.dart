@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:siti/dashboard/dashboard.dart';
 import 'package:siti/dashboard/dashboard2.dart';
 import 'package:provider/provider.dart ';
-import 'package:siti/mqtt_client/mqttC.dart';
+import 'package:siti/mqtt_client/Reciveds/topic1.dart';
+import 'package:siti/mqtt_client/Reciveds/topic2.dart';
+import 'package:siti/mqtt_client/Reciveds/topic3.dart';
+import 'package:siti/mqtt_client/Reciveds/topic4.dart';
+import 'package:siti/mqtt_client/Reciveds/topic5.dart';
+import 'package:siti/mqtt_client/Reciveds/topic6.dart';
+import 'package:siti/mqtt_client/Reciveds/topic7.dart';
+import 'package:siti/mqtt_client/Reciveds/topic8.dart';
+import 'package:siti/mqtt_client/Reciveds/topic9.dart';
 
 class TableData extends StatelessWidget {
 
@@ -11,8 +19,32 @@ class TableData extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => MQTTManager(),
-        )
+          create: (_) => MQTTManager1(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager2(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager3(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager4(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager5(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager6(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager7(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager8(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => MQTTManager9(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -33,12 +65,15 @@ class Machines extends StatefulWidget {
 class _DataTableExample extends State<Machines> {
   @override
   Widget build(BuildContext context) {
-    final pay = Provider.of<MQTTManager>(context);
-
-    var topic1 = "F01/R01/M01";
-    var topic2 = "F01/R01/M02";
-    pay.connectMQTT(topic1 + "/flow"); var pyloadM1 = double.parse(pay.payload);
-    pay.connectMQTT2(topic2 + "/flow"); var pyloadM2 = double.parse(pay.payload2);
+    final pay1 = Provider.of<MQTTManager1>(context); pay1.connectMQTT();
+    final pay2 = Provider.of<MQTTManager2>(context); pay2.connectMQTT();
+    final pay3 = Provider.of<MQTTManager3>(context); pay3.connectMQTT();
+    final pay4 = Provider.of<MQTTManager4>(context); pay4.connectMQTT();
+    final pay5 = Provider.of<MQTTManager5>(context); pay5.connectMQTT();
+    final pay6 = Provider.of<MQTTManager6>(context); pay6.connectMQTT();
+    final pay7 = Provider.of<MQTTManager7>(context); pay7.connectMQTT();
+    final pay8 = Provider.of<MQTTManager8>(context); pay8.connectMQTT();
+    final pay9 = Provider.of<MQTTManager9>(context); pay9.connectMQTT();
 
 
     return MaterialApp(
@@ -60,180 +95,77 @@ class _DataTableExample extends State<Machines> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
                 )),
                 DataColumn(label: Text(
-                    'Connecter',
+                    '\r\r\rConnecter?',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
                 )),
                 DataColumn(label: Text(
-                    'Production',
+                    '\r\r\r\r\r\r\r\rProduction',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
                 )),
-                DataColumn(label: Text(
-                    '  Detail',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
-                )),
+
               ],
               rows: [
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M01')),
-                  DataCell(Text('\r\r\r\r\r\r\r ${etat(pyloadM1)}')),
-                  DataCell(Text('${pyloadM1.toString()} u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => GaugeApp()),
-                      );
-                    },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay1.isConnected}')),//${etat(pyloadM1)}
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r ${pay1.payload} u/min')),//${pyloadM1.toString()}
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M02')),
-                  DataCell(Text('\r\r\r\r\r\r\r ${etat(pyloadM2)}')),
-                  DataCell(Text('${pyloadM2.toString()} u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => GaugeApp2()),
-                      );
-                    },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay2.isConnected}')), //${etat(pyloadM2)}
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay2.payload} u/min')), //${pyloadM2.toString()}
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M03')),
-                  DataCell(Text('\r\r\r\r\r\r\r N')),
-                  DataCell(Text('0.0 u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () { },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay3.isConnected}')),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay3.payload} u/min')),
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M04')),
-                  DataCell(Text('\r\r\r\r\r\r\r N')),
-                  DataCell(Text('0.0 u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () { },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay4.isConnected}')),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay4.payload} u/min')),
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M05')),
-                  DataCell(Text('\r\r\r\r\r\r\r C')),
-                  DataCell(Text('100 u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () { },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay5.isConnected}')),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay5.payload} u/min')),
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M06')),
-                  DataCell(Text('\r\r\r\r\r\r\r N')),
-                  DataCell(Text('100 u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () { },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay6.isConnected}')),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay6.payload} u/min')),
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M07')),
-                  DataCell(Text('\r\r\r\r\r\r\r C')),
-                  DataCell(Text('100 u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () { },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay7.isConnected}')),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay7.payload} u/min')),
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M08')),
-                  DataCell(Text('\r\r\r\r\r\r\r C')),
-                  DataCell(Text('100 u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () { },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay8.isConnected}')),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay8.payload} u/min')),
+
                 ]),
 
                 DataRow(cells: [
                   DataCell(Text('F01/R01/M09')),
-                  DataCell(Text('\r\r\r\r\r\r\r N')),
-                  DataCell(Text('00 u/min')),
-                  DataCell(TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.blue,
-                    ),
-                    onPressed: () { print('ana btn 9 <==='); },
-                    child: Icon(
-                      Icons.show_chart_rounded,
-                      color: Colors.blueAccent,
-                      size: 35.0,
-                    ),
-                  )),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r${pay9.isConnected}')),
+                  DataCell(Text('\r\r\r\r\r\r\r\r\r\r\r\r${pay9.payload} u/min')),
+
                 ]),
 
               ],

@@ -50,7 +50,7 @@ class _LoginFreshResetPasswordState extends State<LoginFreshResetPassword> {
     return Scaffold(
       appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: widget.backgroundColor ?? Color(0xFFE7004C),
+          backgroundColor: widget.backgroundColor ?? Colors.lightGreen[700],
           centerTitle: true,
           elevation: 0,
           title: Text(
@@ -67,7 +67,7 @@ class _LoginFreshResetPasswordState extends State<LoginFreshResetPassword> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.7,
               width: MediaQuery.of(context).size.width,
-              color: widget.backgroundColor ?? Color(0xFFE7004C),
+              color: widget.backgroundColor ?? Colors.lightGreen[700],
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,7 +153,7 @@ class _LoginFreshResetPasswordState extends State<LoginFreshResetPassword> {
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide(color: Color(0xFFAAB5C3))),
+                          borderSide: BorderSide(color: Colors.lightGreen[700])),
                       filled: true,
                       fillColor: Color(0xFFF3F3F5),
                       focusColor: Color(0xFFF3F3F5),
@@ -164,7 +164,7 @@ class _LoginFreshResetPasswordState extends State<LoginFreshResetPassword> {
                           borderRadius: BorderRadius.circular(25),
                           borderSide: BorderSide(
                               color:
-                                  widget.backgroundColor ?? Color(0xFFE7004C))),
+                                  widget.backgroundColor ?? Colors.lightGreen[700])),
                       hintText: this.loginFreshWords.hintLoginUser)),
             ),
             (this.isRequest)
@@ -200,7 +200,7 @@ class _LoginFreshResetPasswordState extends State<LoginFreshResetPassword> {
                                 borderRadius: BorderRadius.circular(40),
                               ),
                               color:
-                                  widget.backgroundColor ?? Color(0xFFE7004C),
+                                  widget.backgroundColor ?? Colors.lightGreen[700],
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),

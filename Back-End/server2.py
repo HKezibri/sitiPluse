@@ -24,7 +24,7 @@ mqtt = Mqtt(app)
 
 global Breaks, breaksDateDebut
 Breaks = {
-    "F01/R01/M01" :  [],
+    "F01/R01/M01" :  [], 
     "F01/R01/M02" :  [],
     "F01/R01/M03" :  [],
     "F01/R01/M04" :  [],
@@ -111,14 +111,41 @@ def handle_mqtt_message(client, userdata, message):
             'date': datetime.datetime.utcnow()
         })
         
-         
+    if int(message.payload.decode()) <= 5:        
+        Breaks[message.topic.split('/c')[0]].append(datetime.datetime.utcnow())
 
+        for e in Breaks:
+            for b in range(len(e)):
+                try :
+                    #int(str(e[b] - e[b+1]).split(':')[2]) <= 30 
+                    pass
+                except:
+                    print("no")
+        
+       
+            
     print(data ,' ==>  ', datetime.datetime.utcnow())
     
 
+
+"""
+mongo.db.Breaks.insert_one({
+                "topic" : message.topic.split('/c')[0],
+                "datedebut" : datetime.datetime.utcnow(),
+                "datefin" :   '' ,
+                "temptotal" :'',
+                "cause" :  "",
+            })
+
+"""
+
+
+
+
+
 @app.route('/breaks')
 def breakMethode() :
-    print('===>        Breaks          <===')
+    
     return jsonify({"F01/R01/M01" :  [["12:59:00", "13:05:00", 6], ["14:00:00", "14:11:00", 11]] 
     })
 
@@ -237,12 +264,22 @@ def Recover():
                         "Password": recovred
                     }
                 })
+            return jsonify({
+            "status" : "Email sent successfully"
+            })
+
         except:
             print('error- -----')
 
 
+@app.route('/break', methods = ["Get", "POST"])
+def breaking() :
+    if request.method == "POST":
+        idBreak = request.form.get('idBreak')
+        topic = request.form.get('topic')
+        cause = request.form.get('cause')
 
-
+        return jsonify({"status" : "Break N°: 12, Topic : F01/R01/M01 Justified successfully"})
 
 
 if __name__ == '__main__':
