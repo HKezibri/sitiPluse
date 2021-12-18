@@ -10,25 +10,25 @@ Nous avons utilisé comme outils Python-Flask, MQTT-Client, MongoDB et flutter.
 ## A quoi ressemble notre application mobile
 
 ### Acceuil
-<img src="/capture/1.PNG" alt="" />
+<img src="./capture/1.PNG" alt="" />
 
 ### S'authentifier
 <img src="./capture/2.PNG" alt="" />
 
 ### Recuperer le mot de passe
-<img src="../capture/3.PNG" alt="" />
-<img src="4.PNG" alt="" />
+<img src="./capture/3.PNG" alt="" />
+<img src="./capture/4.PNG" alt="" />
 
 ### Tableau de bord
-<img src="5.PNG" alt="" />
+<img src="./capture/5.PNG" alt="" />
 
 ### Justification des arrets
-<img src="6.PNG" alt="" />
-<img src="7.PNG" alt="" />
-<img src="8.PNG" alt="" />
+<img src="./capture/6.PNG" alt="" />
+<img src="./capture/7.PNG" alt="" />
+<img src="./capture/8.PNG" alt="" />
 
 ### tableau des machines
-<img src="9.PNG" alt="" />
+<img src="./capture/9.PNG" alt="" />
 
 
 **Elaaroub Abdellah & Kezibri Hiba**
