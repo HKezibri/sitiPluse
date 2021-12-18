@@ -10,13 +10,13 @@ Nous avons utilisé comme outils Python-Flask, MQTT-Client, MongoDB et flutter.
 ## A quoi ressemble notre application mobile
 
 ### Acceuil
-<img src="1.PNG" alt="" />
+<img src="/capture/1.PNG" alt="" />
 
 ### S'authentifier
-<img src="2.PNG" alt="" />
+<img src="./capture/2.PNG" alt="" />
 
 ### Recuperer le mot de passe
-<img src="3.PNG" alt="" />
+<img src="../capture/3.PNG" alt="" />
 <img src="4.PNG" alt="" />
 
 ### Tableau de bord
