@@ -30,6 +30,7 @@ Nous avons utilisé comme outils Python-Flask, MQTT-Client, MongoDB et flutter.
 ### Tableau des machines
 <img src="./capture/9.PNG" alt="" />
 
+---
 
 **Elaaroub Abdellah & Kezibri Hiba**
 
